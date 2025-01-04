@@ -13,10 +13,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Install and Build
+      - name: Build
         run: |
+          make
           mkdir -p website/get.cloudr.sh
           cp install.sh website/get.cloudr.sh/install.sh
+          cp -r target website/get.cloudr.sh/
 
       - name: Deploy
         run: |
