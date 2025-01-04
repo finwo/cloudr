@@ -13,14 +13,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # - name: Install and Build
-      #   run: |
-      #     sudo apt-get install -yq pandoc
-      #     make
+      - name: Install and Build
+        run: |
+          mkdir -p website/get.cloudr.sh
+          cp install.sh website/get.cloudr.sh/install.sh
 
       - name: Deploy
         run: |
           curl -O https://dl.min.io/client/mc/release/linux-amd64/mc
           sudo install mc /usr/local/bin/
           mc alias set target https://s3.finwo.net/ ${{ secrets.S3_KEY }} ${{ secrets.S3_SECRET }} --api S3v4
-          tool/s3-mirror-mime.sh website/cloudr.sh target/cloudr.sh
+          tool/s3-mirror-mime.sh website/cloudr.sh     target/cloudr.sh
+          tool/s3-mirror-mime.sh website/get.cloudr.sh target/get.cloudr.sh
