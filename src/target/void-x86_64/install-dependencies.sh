@@ -1,2 +1,2 @@
-xbps-install -S
-xbps-install -y jq
+xbps-install -S    &>/dev/null
+xbps-install -y jq &>/dev/null
